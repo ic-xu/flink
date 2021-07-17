@@ -19,6 +19,7 @@
 package org.apache.flink.streaming.scala.examples.socket
 
 import org.apache.flink.api.java.utils.ParameterTool
+import org.apache.flink.configuration.Configuration
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows
 import org.apache.flink.streaming.api.windowing.time.Time
@@ -59,7 +60,7 @@ object SocketWindowWordCount {
     }
     
     // get the execution environment
-    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI()
     
     // get input data by connecting to the socket
     val text: DataStream[String] = env.socketTextStream(hostname, port, '\n')
